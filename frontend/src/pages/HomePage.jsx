@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import Product from "../components/Product";
 import TableProduct from "../components/TableProduct";
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL
+
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
@@ -12,7 +14,7 @@ const HomePage = () => {
   const getProducts = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get("http://localhost:3000/api/products");
+      const response = await axios.get(`${SERVER_URL}/api/products`);
       console.log(response.data)
       setProducts(response.data);
       setIsLoading(false);

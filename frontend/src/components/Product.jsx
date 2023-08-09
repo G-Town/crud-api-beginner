@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL
+
 const Product = ({ product, getProducts }) => {
   const deleteProduct = async (id) => {
     const result = await Swal.fire({
@@ -14,7 +16,7 @@ const Product = ({ product, getProducts }) => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/api/products/${id}`);
+        await axios.delete(`${SERVER_URL}/api/products/${id}`);
         toast.success("Delete a Product Successfully");
         getProducts();
       } catch (error) {

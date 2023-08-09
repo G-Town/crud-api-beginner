@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL
+
 const EditPage = () => {
   let { id } = useParams();
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ const EditPage = () => {
   const getProduct = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://localhost:3000/api/products/${id}`);
+      const response = await axios.get(`${SERVER_URL}/api/products/${id}`);
       setProduct({
         name: response.data.name,
         quantity: response.data.quantity,
@@ -35,7 +37,7 @@ const EditPage = () => {
   const updateProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/api/products/${id}`, product);
+      await axios.put(`${SERVER_URL}/api/products/${id}`, product);
       toast.success("Updated a product successfully");
       navigate("/");
     } catch (error) {

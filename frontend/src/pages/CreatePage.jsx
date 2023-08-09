@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL
 
 const CreatePage = () => {
 
@@ -21,7 +22,7 @@ const CreatePage = () => {
         }
         try {
             setIsLoading(true);
-            const response = await axios.post("http://localhost:3000/api/products", {name: name, quantiy: quantity, price: price, image: image});
+            const response = await axios.post(`${SERVER_URL}/api/products`, {name: name, quantiy: quantity, price: price, image: image});
             toast.success(`Save ${response.data.name} Successfully`);
             setIsLoading(false);
             navigate("/");
